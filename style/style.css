@@ -72,3 +72,25 @@ body {
 .saved-time p {
   margin: 0;
 }
+
+.error {
+  margin: 20px;
+  color: rgba(255, 0, 0, 0.767);
+  font-size: 1.2rem;
+}
+
+.warning-icon {
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  text-align: center;
+  background: transparent;
+}
