@@ -1,14 +1,24 @@
 const timerClass: HTMLDivElement = document.querySelector('#timer') as HTMLDivElement;
+const savedClass: HTMLDivElement = document.querySelector('.saved-times') as HTMLDivElement;
 const startbtn: HTMLButtonElement = document.querySelector('#start') as HTMLButtonElement;
 const stopbtn: HTMLButtonElement = document.querySelector('#stop') as HTMLButtonElement;
+const savebtn: HTMLButtonElement = document.querySelector('#save') as HTMLButtonElement;
 const resetbtn: HTMLButtonElement = document.querySelector('#reset') as HTMLButtonElement;
+type time = string;
+type times = time[];
 let hours: number = 0, minutes: number = 0, seconds: number = 0;
 let timer: any = null;
 let informer: boolean = false;
+let saved: times = [];
+
+localStorage.getItem('todoList') ? saved = JSON.parse(localStorage.getItem('todoList') as string) : null;
 
 startbtn.addEventListener('click', () => startTimer());
 stopbtn.addEventListener('click', () => stopTimer());
+savebtn.addEventListener('click', () => saveTime());
 resetbtn.addEventListener('click', () => resetTimer());
+
+convertTime();
 
 function startTimer(): void {
   if (informer) {
@@ -62,4 +72,32 @@ function timerFunction(): void {
 
   informer = true;
   timerClass.innerHTML = `${hours <= 9 ? `0${hours}` : hours}:${minutes <= 9 ? `0${minutes}` : minutes}:${seconds <= 9 ? `0${seconds}` : seconds}`;
+}
+
+function saveTime(): void {
+  saved.unshift(timerClass.innerHTML);
+
+  if (saved.length > 10) {
+    saved.pop();
+  }
+
+  convertTime();
+  localStorage.setItem('saved', JSON.stringify(saved));
+}
+
+function convertTime(): void {
+  if (saved.length === 0) {
+    return;
+  }
+
+  savedClass.innerHTML = '';
+
+  for (let i = 0; i < saved.length && i < 3; i++) {
+    savedClass.innerHTML += `
+     <div class="saved-time save${i}">
+        <p>${saved[i]}</p>
+        <button class="btn${i}">Delete</button>
+      </div>
+    `;
+  }
 }
