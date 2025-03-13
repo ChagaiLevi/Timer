@@ -9,7 +9,7 @@ let hours = 0, minutes = 0, seconds = 0;
 let timer = null;
 let informer = false;
 let saved = [];
-localStorage.getItem('todoList') ? saved = JSON.parse(localStorage.getItem('todoList')) : null;
+localStorage.getItem('saved') ? saved = JSON.parse(localStorage.getItem('saved')) : null;
 startbtn.addEventListener('click', () => startTimer());
 stopbtn.addEventListener('click', () => stopTimer());
 savebtn.addEventListener('click', () => saveTime());
@@ -62,12 +62,15 @@ function timerFunction() {
     timerClass.innerHTML = `${hours <= 9 ? `0${hours}` : hours}:${minutes <= 9 ? `0${minutes}` : minutes}:${seconds <= 9 ? `0${seconds}` : seconds}`;
 }
 function saveTime() {
+    if (timerClass.innerHTML === '00:00:00') {
+        return;
+    }
     saved.unshift(timerClass.innerHTML);
     if (saved.length > 10) {
         saved.pop();
     }
-    convertTime();
     localStorage.setItem('saved', JSON.stringify(saved));
+    convertTime();
 }
 function convertTime() {
     if (saved.length === 0) {

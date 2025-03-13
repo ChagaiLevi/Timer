@@ -11,7 +11,7 @@ let timer: any = null;
 let informer: boolean = false;
 let saved: times = [];
 
-localStorage.getItem('todoList') ? saved = JSON.parse(localStorage.getItem('todoList') as string) : null;
+localStorage.getItem('saved') ? saved = JSON.parse(localStorage.getItem('saved') as string) : null;
 
 startbtn.addEventListener('click', () => startTimer());
 stopbtn.addEventListener('click', () => stopTimer());
@@ -75,14 +75,18 @@ function timerFunction(): void {
 }
 
 function saveTime(): void {
+  if (timerClass.innerHTML === '00:00:00') {
+    return;
+  }
+
   saved.unshift(timerClass.innerHTML);
 
   if (saved.length > 10) {
     saved.pop();
   }
 
-  convertTime();
   localStorage.setItem('saved', JSON.stringify(saved));
+  convertTime();
 }
 
 function convertTime(): void {
