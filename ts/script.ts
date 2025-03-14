@@ -19,6 +19,7 @@ savebtn.addEventListener('click', () => saveTime());
 resetbtn.addEventListener('click', () => resetTimer());
 
 convertTime();
+deleteTime();
 
 function startTimer(): void {
   if (informer) {
@@ -31,7 +32,7 @@ function startTimer(): void {
 }
 
 function stopTimer(): void {
-  startbtn.innerHTML = 'Resume';
+  timerClass.innerHTML === '00:00:00' ? null : startbtn.innerHTML = 'Resume';
   clearInterval(timer);
   informer = false;
 }
@@ -87,6 +88,7 @@ function saveTime(): void {
 
   localStorage.setItem('saved', JSON.stringify(saved));
   convertTime();
+  deleteTime();
 }
 
 function convertTime(): void {
@@ -103,5 +105,18 @@ function convertTime(): void {
         <button class="btn${i}">Delete</button>
       </div>
     `;
+  }
+}
+
+function deleteTime(): void {
+  for (let i = 0; i < saved.length && i < 3; i++) {
+    const btn = savedClass.querySelector(`.btn${i}`) as HTMLButtonElement;
+    btn.addEventListener('click', () => {
+      i === 0 ? saved = [] : null;
+      saved.splice(i, 1);
+      localStorage.setItem('saved', JSON.stringify(saved));
+      convertTime();
+      deleteTime();
+    });
   }
 }
