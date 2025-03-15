@@ -75,9 +75,6 @@ function saveTime() {
     deleteTime();
 }
 function convertTime() {
-    if (saved.length === 0) {
-        return;
-    }
     savedClass.innerHTML = '';
     for (let i = 0; i < saved.length && i < 3; i++) {
         savedClass.innerHTML += `
@@ -92,8 +89,8 @@ function deleteTime() {
     for (let i = 0; i < saved.length && i < 3; i++) {
         const btn = savedClass.querySelector(`.btn${i}`);
         btn.addEventListener('click', () => {
-            i === 0 ? saved = [] : null;
             saved.splice(i, 1);
+            ;
             localStorage.setItem('saved', JSON.stringify(saved));
             convertTime();
             deleteTime();
