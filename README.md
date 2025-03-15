@@ -24,3 +24,6 @@ A simple yet functional Timer application built using HTML, CSS, and TypeScript.
 1. Clone the repository:
    ```bash
    git clone https://github.com/ChagaiLevi/timer
+## Live Demo
+
+See the calculator in action: [Live Demo](https://Timer.app)
