@@ -23,4 +23,4 @@ A simple yet functional Timer application built using HTML, CSS, and TypeScript.
 ## Installation:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/timer-app.git
+   git clone https://github.com/ChagaiLevi/timer
