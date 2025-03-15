@@ -36,6 +36,7 @@ function stopTimer(): void {
   clearInterval(timer);
   informer = false;
 }
+
 function resetTimer(): void {
   hours = 0;
   minutes = 0;
