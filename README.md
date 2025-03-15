@@ -21,7 +21,7 @@ A simple yet functional Timer application built using HTML, CSS, and TypeScript.
 - **TypeScript**: For handling the logic of the timer, saving times, and managing localStorage.
 
 ## Screenshots:
-![To-Do List Demo](preview.png)
+![To-Do List Demo](https://github.com/yourusername/your-repository/raw/main/Preview.png)
 
 ## Installation:
 1. Clone the repository:
