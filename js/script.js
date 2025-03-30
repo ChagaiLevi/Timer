@@ -90,15 +90,13 @@ function deleteTime() {
         const btn = savedClass.querySelector(`.btn${i}`);
         const savedTimeDiv = savedClass.querySelector(`.save${i}`);
         btn.addEventListener('click', () => {
-            // הוספת אנימציה של fade-out
             savedTimeDiv.classList.add('fade-out');
-            // מחכים לאנימציה לפני שמסירים את האלמנט
             setTimeout(() => {
                 saved.splice(i, 1);
                 localStorage.setItem('saved', JSON.stringify(saved));
                 convertTime();
                 deleteTime();
-            }, 500); // זמן שממתינים עד שהאנימציה תושלם (מילישניות)
+            }, 500);
         });
     }
 }
