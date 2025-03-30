@@ -20,8 +20,8 @@ A simple yet functional Timer application built using HTML, CSS, and TypeScript.
 - **CSS**: For styling and adding smooth animations for interactions.
 - **TypeScript**: For handling the logic of the timer, saving times, and managing localStorage.
 
-## Screenshots:
-![To-Do List Demo](https://github.com/ChagaiLevi/Timer/blob/main/Preview.png)
+## Preview:
+![To-Do List Demo](https://stackblitz.com/edit/stackblitz-starters-ath1ntgn?file=index.html)
 
 ## Installation:
 1. Clone the repository:
