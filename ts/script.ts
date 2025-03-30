@@ -52,7 +52,7 @@ function timerFunction(): void {
 
   startbtn.innerHTML === 'Resume' ? startbtn.innerHTML = 'Start' : null;
 
-  if (/*hours === 24 && minutes === 60 && seconds === 60*/true) {
+  if (hours === 24 && minutes === 60 && seconds === 60) {
     timerClass.innerHTML = `
         ${timerClass.innerHTML}
         <div class="error"> <span class="warning-icon">!</span>You have reached your time limit!<div>
