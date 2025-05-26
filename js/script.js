@@ -63,7 +63,7 @@ function timerFunction() {
     timerClass.innerHTML = `${hours <= 9 ? `0${hours}` : hours}:${minutes <= 9 ? `0${minutes}` : minutes}:${seconds <= 9 ? `0${seconds}` : seconds}`;
 }
 function saveTime() {
-    if (timerClass.innerHTML === '00:00:00') {
+    if (timerClass.innerHTML === '00:00:00' || timerClass.innerHTML === saved[0]) {
         return;
     }
     saved.unshift(timerClass.innerHTML);

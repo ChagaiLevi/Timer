@@ -77,7 +77,7 @@ function timerFunction(): void {
 }
 
 function saveTime(): void {
-  if (timerClass.innerHTML === '00:00:00') {
+  if (timerClass.innerHTML === '00:00:00' || timerClass.innerHTML === saved[0]) {
     return;
   }
 
