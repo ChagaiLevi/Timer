@@ -1,7 +1,15 @@
+import Timer from "./Components/Timer"
+import Buttons from "./Components/Buttons"
+import ListTimes from "./Components/ListTimes"
+
 function App() {
 
   return (
-    <div>hi</div>
+    <div className="container">
+      <Timer />
+      <Buttons />
+      <ListTimes />
+    </div>
   )
 }
 
