@@ -1,6 +1,6 @@
-const Timer = () => {
+const Timer: React.FC<{ timer: string }> = ({ timer }) => {
   return (
-    <div id="timer">00:00:00</div>
+    <div id="timer">{timer}</div>
   )
 }
 
