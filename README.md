@@ -1,26 +1,69 @@
-# Timer Application
+# React + TypeScript + Vite
 
-A simple yet functional Timer application built using HTML, CSS, and TypeScript. This app provides a user-friendly interface with various features like a stopwatch, the ability to save times, and a reset function. It also saves the last few recorded times in the browser's localStorage, so users can review them later.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features:
-- **Start/Stop Timer**: The user can start or stop the timer at any point. The "Start" button changes to "Resume" once the timer is stopped, allowing the user to resume from where they left off.
-- **Reset Timer**: The timer can be reset back to `00:00:00`.
-- **Save Time**: Users can save the current timer value to a list of saved times. The app stores the last 10 times in localStorage, and up to 3 times can be displayed at once on the page.
-- **Smooth UI**: The app features smooth transitions when saving and deleting times, making the interaction more enjoyable.
-- **Local Storage**: Saved times persist even after refreshing the page, as they are stored in the browser's localStorage.
+Currently, two official plugins are available:
 
-## How it Works:
-1. The user can interact with the timer using the buttons: **Start**, **Stop**, **Save**, and **Reset**.
-2. When a time is saved, it is added to a list that shows up below the timer.
-3. The last 3 saved times are displayed with a **Delete** button to remove them.
-4. If the user deletes a saved time, it is smoothly faded out before being removed from the list.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Technologies Used:
-- **HTML**: For creating the structure of the app.
-- **CSS**: For styling and adding smooth animations for interactions.
-- **TypeScript**: For handling the logic of the timer, saving times, and managing localStorage.
+## Expanding the ESLint configuration
 
-## Installation:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ChagaiLevi/timer
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
