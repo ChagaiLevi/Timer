@@ -15,7 +15,7 @@ function App() {
   const [minutes, setMinutes] = useState<number>(0);
   const [hours, setHours] = useState<number>(0);
   const [buttonName, setButtonName] = useState<string>("Start");
-  let ifReset: boolean = false;
+  let isReset: boolean = false;
   const [saved, setSaved] = useState<TimeProps[]>(localStorage.getItem('savedTimes') ? JSON.parse(localStorage.getItem('savedTimes') as string) : []);
 
   seconds;
@@ -70,7 +70,7 @@ function App() {
       intervalId.current = null;
     }
 
-    ifReset ? setButtonName("Start") : setButtonName("Resume");
+    isReset ? setButtonName("Start") : setButtonName("Resume");
   };
 
   useEffect(() => {
@@ -93,7 +93,7 @@ function App() {
   }, [saved]);
 
   const resetTimer: () => void = () => {
-    ifReset = true;
+    isReset = true;
     setSeconds(0);
     setMinutes(0);
     setHours(0);
