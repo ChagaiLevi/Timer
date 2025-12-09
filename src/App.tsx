@@ -17,11 +17,9 @@ function App() {
   const [buttonName, setButtonName] = useState<string>("Start");
   let isReset: boolean = false;
   const [saved, setSaved] = useState<TimeProps[]>(localStorage.getItem('savedTimes') ? JSON.parse(localStorage.getItem('savedTimes') as string) : []);
-
-  seconds;
   const intervalId = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const updateTimer = () => {
+  const updateTimer: () => void = () => {
     setSeconds((prevSeconds) => {
       let newSeconds = prevSeconds + 1;
       let newMinutes = minutes;
@@ -117,6 +115,9 @@ function App() {
   const deleteTime = (id: string) => {
     setSaved(saved.filter(item => item.id !== id));
   }
+
+  // I don't need to use seconds here, as the timer is already formatted in hours:minutes:seconds
+  seconds;
 
   return (
     <div className="container">
