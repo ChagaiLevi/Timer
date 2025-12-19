@@ -1,4 +1,8 @@
-const Timer: React.FC<{ timer: string }> = ({ timer }) => {
+type timerProps = {
+  timer: string;
+}
+
+const Timer: React.FC<timerProps> = ({ timer }) => {
   return (
     <div id="timer">{timer}</div>
   )

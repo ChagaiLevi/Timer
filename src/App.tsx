@@ -11,54 +11,24 @@ export type TimeProps = {
 
 function App() {
   const [timer, setTimer] = useState<string>("00:00:00");
-  const [seconds, setSeconds] = useState<number>(0);
-  const [minutes, setMinutes] = useState<number>(0);
-  const [hours, setHours] = useState<number>(0);
   const [buttonName, setButtonName] = useState<string>("Start");
-  let isReset: boolean = false;
   const [saved, setSaved] = useState<TimeProps[]>(localStorage.getItem('savedTimes') ? JSON.parse(localStorage.getItem('savedTimes') as string) : []);
   const intervalId = useRef<ReturnType<typeof setInterval> | null>(null);
+  const elapsedRef = useRef<number>(0); // <- persistent counter
 
-  const updateTimer: () => void = () => {
-    setSeconds((prevSeconds) => {
-      let newSeconds = prevSeconds + 1;
-      let newMinutes = minutes;
-      let newHours = hours;
-
-      if (newSeconds >= 60) {
-        newSeconds = 0;
-        newMinutes += 1;
-      }
-
-      if (newMinutes >= 60) {
-        newMinutes = 0;
-        newHours += 1;
-      }
-
-      if (newHours >= 24) {
-        newHours = 0;
-      }
-
-      setMinutes(newMinutes);
-      setHours(newHours);
-
-      setTimer(
-        `${newHours <= 9 ? `0${newHours}` : newHours}:${newMinutes <= 9 ? `0${newMinutes}` : newMinutes
-        }:${newSeconds <= 9 ? `0${newSeconds}` : newSeconds}`
-      );
-
-      return newSeconds;
-    });
+  const formatTime = (totalSec: number) => {
+    const h: number = Math.floor(totalSec / 3600);
+    const m: number = Math.floor((totalSec % 3600) / 60);
+    const s: number = totalSec % 60;
+    return `${h <= 9 ? `0${h}` : h}:${m <= 9 ? `0${m}` : m}:${s <= 9 ? `0${s}` : s}`;
   };
 
   const startTimer = () => {
     if (intervalId.current) return;
-
-    updateTimer();
-    buttonName === "Resume" && setButtonName("Start");
-
+    setButtonName('Start');
     intervalId.current = setInterval(() => {
-      updateTimer();
+      elapsedRef.current += 1;
+      setTimer(formatTime(elapsedRef.current));
     }, 1000);
   };
 
@@ -68,7 +38,7 @@ function App() {
       intervalId.current = null;
     }
 
-    isReset ? setButtonName("Start") : setButtonName("Resume");
+    timer !== '00:00:00' && setButtonName('Resume');
   };
 
   useEffect(() => {
@@ -90,13 +60,11 @@ function App() {
     localStorage.setItem('savedTimes', JSON.stringify(saved));
   }, [saved]);
 
-  const resetTimer: () => void = () => {
-    isReset = true;
-    setSeconds(0);
-    setMinutes(0);
-    setHours(0);
-    setTimer("00:00:00");
+  const resetTimer = () => {
+    elapsedRef.current = 0;
+    setTimer('00:00:00');
     stopTimer();
+    setButtonName('Start');
   };
 
   const saveTime: () => void = () => {
@@ -115,9 +83,6 @@ function App() {
   const deleteTime = (id: string) => {
     setSaved(saved.filter(item => item.id !== id));
   }
-
-  // I don't need to use seconds here, as the timer is already formatted in hours:minutes:seconds
-  seconds;
 
   return (
     <div className="container">
