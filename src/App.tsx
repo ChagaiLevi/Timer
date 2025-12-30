@@ -52,8 +52,9 @@ function App() {
 
   useEffect(() => {
     if (saved.length > 10) {
-      setSaved(saved.slice(0, 10));
-      localStorage.setItem('savedTimes', JSON.stringify(saved.slice(0, 10)));
+      const trimmed = saved.slice(-10);
+      setSaved(trimmed);
+      localStorage.setItem('savedTimes', JSON.stringify(trimmed));
       return;
     }
 
