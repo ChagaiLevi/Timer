@@ -1,14 +1,11 @@
-import { type TimeProps } from "../App"
+import { type TimeProps } from "../types/time"
 
 type lineTimesProps = {
   item: TimeProps,
-  index: number,
   deleteTime: (id: string) => void
 }
 
-const LineTimes: React.FC<lineTimesProps> = ({ item, index, deleteTime }) => {
-  if (index >= 3) return;
-
+const LineTimes: React.FC<lineTimesProps> = ({ item, deleteTime }) => {
   return (
     <div className="saved-time">
       <p>{item.time}</p>

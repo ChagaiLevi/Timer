@@ -1,4 +1,4 @@
-import { type TimeProps } from "../App"
+import { type TimeProps } from "../types/time"
 import LineTimes from './LineTimes';
 
 type listTimesProps = {
@@ -9,9 +9,9 @@ type listTimesProps = {
 const ListTimes: React.FC<listTimesProps> = ({ saved, deleteTime }) => {
   return (
     <div className="saved-times">
-      {saved.slice().reverse().map((item: TimeProps, index: number) => {
+      {saved.slice(-3).reverse().map((item: TimeProps) => {
         return (
-          <LineTimes item={item} index={index} key={item.id} deleteTime={deleteTime} />
+          <LineTimes item={item} key={item.id} deleteTime={deleteTime} />
         )
       })}
     </div>
